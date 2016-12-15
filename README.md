@@ -1,0 +1,2 @@
+# ckeditor_widgets_refactor
+Refactoring drupal module ckeditor_widgets
