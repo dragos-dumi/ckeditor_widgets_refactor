@@ -1,0 +1,18 @@
+.widget-quotebox {
+	padding: 8px;
+	margin: 10px auto;
+	background: #eee;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	box-shadow: 0 1px 1px #fff inset, 0 -1px 0px #ccc inset;
+	background: #eee url(icon.png) 5px 2px no-repeat;
+}
+.quote-content,
+.quote-cite {
+	box-shadow: 0 1px 1px #ddd inset;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	background: #fff;
+	margin: 0 0 10px 20px;
+	padding: 2px 5px;
+}
