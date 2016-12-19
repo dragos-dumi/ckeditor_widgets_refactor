@@ -4,18 +4,14 @@
  */
 
 (function($) {
-    Drupal.behaviors.ckeditor_widgets = {
+    Drupal.behaviors.ckeditor_widget_accordion = {
         attach: function (context, settings) {
-            jQuery( function() {
-
-                jQuery('.accordion').each(function() {
-                    var active = 0;
-                    if (jQuery(this).data('active') != undefined) {
-                        active  = jQuery(this).data('active') - 1;
-                    }
-                    jQuery(this).accordion({collapsible: true, active:active});
-                });
-
+            $(context).find('.accordion').once('ckeditor_widget_accordion').each(function () {
+                var options = {
+                    collapsible: true
+                };
+                options.active = $(this).data('active') ? $(this).data('active') : false;
+                $(this).accordion(options);
             });
         }
     };

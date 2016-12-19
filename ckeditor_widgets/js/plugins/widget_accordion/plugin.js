@@ -66,7 +66,7 @@ CKEDITOR.plugins.add('widget_accordion', {
 
             data: function() {
 
-                var activePanel = this.data.activePanel != undefined ? this.data.activePanel : 1;
+                var activePanel = this.data.activePanel != undefined ? this.data.activePanel - 1 : false;
                 var name = this.data.name != undefined ? this.data.name : 'accordion';
                 var count = this.data.count != undefined ? this.data.count : 0;
 
@@ -82,7 +82,7 @@ CKEDITOR.plugins.add('widget_accordion', {
                         var newPanel = CKEDITOR.dom.element.createFromHtml( template );
                         this.element.append(newPanel);
 
-                        var template = '<div class="accordion-content content-'+i+active+'">' + '' + '</div>';
+                        var template = '<div class="accordion-content content-'+i+active+'">' + 'Content ' + i + '</div>';
                         var newPanel = CKEDITOR.dom.element.createFromHtml( template );
                         this.element.append(newPanel);
                     }
@@ -114,8 +114,9 @@ CKEDITOR.plugins.add('widget_accordion', {
             command: 'widgetAccordion',
             icon: this.path + '/icon.png'
         };
-        if (typeof editor._.menuGroups.widgets_menu != 'undefined') {
-            item.group = 'widgets_menu';
+        if (typeof editor._.menuGroups['widget_menu'] != 'undefined') {
+            editor.widget_menu_items.push('widget_accordion');
+            item.group = 'widget_menu';
             editor.addMenuItem('widget_accordion', item);
         }
         else {
