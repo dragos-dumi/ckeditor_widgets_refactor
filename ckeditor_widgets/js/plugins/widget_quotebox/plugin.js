@@ -37,8 +37,9 @@ CKEDITOR.plugins.add( 'widget_quotebox', {
             command: 'widget_quotebox',
             icon: this.path + '/icon.png'
         };
-        if (typeof editor._.menuGroups.widgets_menu != 'undefined') {
-            item.group = 'widgets_menu';
+        if (typeof editor.widget_menu_items != 'undefined') {
+            editor.widget_menu_items.push('widget_quotebox');
+            item.group = 'widget_menu';
             editor.addMenuItem('widget_quotebox', item);
         }
         else {
