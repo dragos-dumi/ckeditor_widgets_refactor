@@ -243,7 +243,7 @@ CKEDITOR.plugins.add( 'widgetbootstrap', {
 
             template:
                 '<dl class="accordion" data-accordion><div class="col-1"></div></dl>',
-
+     
 
             allowedContent: allowedFull,
 
@@ -295,7 +295,7 @@ CKEDITOR.plugins.add( 'widgetbootstrap', {
                         } );
                         this.initEditable( 'content'+i, {
                             selector: '.content-'+i
-                        } );
+                        } ); 
                     }
                 }
 
