@@ -1,4 +1,4 @@
-CKEDITOR.dialog.add( 'widgetfoundationAccordion', function( editor ) {
+CKEDITOR.dialog.add( 'widgetAccordion', function( editor ) {
     return {
         title: 'Edit Accordion Box',
         minWidth: 200,

@@ -72,7 +72,7 @@ class WidgetBootstrap extends CKEditorPluginBase {
                 'image' => drupal_get_path('module', 'ckeditor_widgets') . '/js/plugins/widgetbootstrap/icons/widgetbootstrapAlert.png',
                 'label' => $this->t('Insert alert box'),
             ),
-            'widgetbootstrapAccordion' => array(
+            'widgetAccordion' => array(
                 'image' => drupal_get_path('module', 'ckeditor_widgets') . '/js/plugins/widgetbootstrap/icons/widgetbootstrapAccordion.png',
                 'label' => $this->t('Insert accordion box'),
             ),

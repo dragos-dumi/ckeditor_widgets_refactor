@@ -23,6 +23,7 @@ CKEDITOR.plugins.add( 'widgettemplatemenu', {
             buttonData.widgetbootstrapTwoCol = 'Insert two column template';
             buttonData.widgetbootstrapThreeCol = 'Insert three column template';
             buttonData.widgetbootstrapAlert = 'Insert Alert box';
+            buttonData.widgetAccordion = 'Insert Accordion box';
         }
         if (editor.commands.oembed != undefined) {
             buttonData.oembed = 'Insert media';
@@ -75,7 +76,7 @@ CKEDITOR.plugins.add( 'widgettemplatemenu', {
                     widgetbootstrapTwoCol: editor.commands.widgetbootstrapTwoCol == undefined ? false : editor.commands.widgetbootstrapTwoCol.state,
                     widgetbootstrapThreeCol: editor.commands.widgetbootstrapThreeCol == undefined ? false : editor.commands.widgetbootstrapThreeCol.state,
                     widgetbootstrapAlert: editor.commands.widgetbootstrapAlert == undefined ? false : editor.commands.widgetbootstrapAlert.state,
-                    widgetbootstrapAccordion: editor.commands.widgetbootstrapAccordion == undefined ? false : editor.commands.widgetbootstrapAccordion.state,
+                    widgetAccordion: editor.commands.widgetAccordion == undefined ? false : editor.commands.widgetAccordion.state,
                     oembed: editor.commands.oembed == undefined ? false : editor.commands.oembed.state,
                     codeSnippet: editor.commands.codeSnippet == undefined ? false : editor.commands.codeSnippet.state,
                     leaflet: editor.commands.leaflet == undefined ? false : editor.commands.leaflet.state,

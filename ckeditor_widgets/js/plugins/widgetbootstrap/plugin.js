@@ -236,24 +236,42 @@ CKEDITOR.plugins.add( 'widgetbootstrap', {
         // Alert dialog
         CKEDITOR.dialog.add( 'widgetbootstrapAlert', this.path + 'dialogs/widgetbootstrapAlert.js' );
 
-        /*CKEDITOR.dialog.add( 'widgetbootstrapAccordion', this.path + 'dialogs/widgetbootstrapAccordion.js' );
-        editor.widgets.add( 'widgetbootstrapAccordion', {
+        CKEDITOR.dialog.add( 'widgetAccordion', this.path + 'dialogs/widgetAccordion.js' );
+        editor.widgets.add( 'widgetAccordion', {
 
             button: showButtons ? 'Add accordion box' : undefined,
 
             template:
-                '<dl class="accordion" data-accordion><div class="col-1"></div></dl>',
-     
+                '<div class="accordion" data-accordion></div>',
+
+            editables: {
+                header: {
+                    selector: '.accordion-none'
+                },
+            },
 
             allowedContent: allowedFull,
 
-            dialog: 'widgetbootstrapAccordion',
+            dialog: 'widgetAccordion',
 
             upcast: function( element ) {
                 return element.name == 'div' && element.hasClass( 'accordion' );
             },
 
-            /*init: function() {
+            init: function() {
+                var count = this.element.data( 'count' );
+                if (count) {
+                    this.data.count = count;
+                    for (var i=1; i <= count; i++) {
+                        this.initEditable( 'heading'+i, {
+                            selector: '.accordion-header-'+i
+                        } );
+                        this.initEditable( 'content'+i, {
+                            selector: '.content-'+i
+                        } );
+                    }
+                }
+
                 var width = this.element.getStyle( 'width' );
                 if ( width )
                     this.setData( 'width', width );
@@ -267,22 +285,21 @@ CKEDITOR.plugins.add( 'widgetbootstrap', {
 
             data: function() {
 
- 
                 var name = this.data.name != undefined ? this.data.name : 'accordion';
                 var count = this.data.count != undefined ? this.data.count : 0;
-                //@todo: var prevCount = this.data.prevCount != undefined ? this.data.prevCount : 
+
+                this.data.prevCount = this.element.data( 'count' );
+                this.element.data('count', count);
 
                 // Add rows
                 if (this.data.prevCount == undefined || this.data.prevCount < count) {
-                    for (var i=this.data.prevCount != undefined ? this.data.prevCount : 1; i<=count; i++) {
+                    for (var i = this.data.prevCount != undefined ? (this.data.prevCount * 1 + 1) : 1; i <= count; i++) {
                         var active = this.data.activePanel == i ? ' active' : '';
-                        var template = 
-                            '<dd class="accordion-navigation">' +
-                                '<a href="#'+ name+i +'"><div class="accordion-header-'+i+'">Heading '+i+'</div></a>' +
-                                '<div id="panel'+ name+i +'" class="content content-'+i+active+'">' +
-                                  '' +
-                                '</div>'
-                            '</dd>'
+                        var template = '<h3 class="accordion-header accordion-header-'+i+'">Heading '+i+'</h3>';
+                        var newPanel = CKEDITOR.dom.element.createFromHtml( template );
+                        this.element.append(newPanel);
+
+                        var template = '<div class="accordion-content content-'+i+active+'">' + '' + '</div>';
                         var newPanel = CKEDITOR.dom.element.createFromHtml( template );
                         this.element.append(newPanel);
                     }
@@ -295,19 +312,19 @@ CKEDITOR.plugins.add( 'widgetbootstrap', {
                         } );
                         this.initEditable( 'content'+i, {
                             selector: '.content-'+i
-                        } ); 
+                        } );
                     }
                 }
 
                 // Remove rows
                 if (this.data.prevCount != undefined && this.data.prevCount > count) {
-                    // @todo
+                    for (var i = 1; i <= (this.data.prevCount - count); i++) {
+                        this.element.getLast().remove(); // h3
+                        this.element.getLast().remove(); // div
+                    }
                 }
-                
-
-                this.data.prevCount = i;
             }
-        } );*/
+        } );
 
         // Append the widget's styles when in the CKEditor edit page,
         // added for better user experience.

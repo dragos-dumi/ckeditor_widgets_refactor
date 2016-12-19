@@ -1,0 +1,6 @@
+ckeditor_widgets_js:
+  js:
+    js/ckeditor_widgets.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.ui.accordion
