@@ -76,6 +76,7 @@ CKEDITOR.plugins.add( 'widgettemplatemenu', {
                     widgetbootstrapTwoCol: editor.commands.widgetbootstrapTwoCol == undefined ? false : editor.commands.widgetbootstrapTwoCol.state,
                     widgetbootstrapThreeCol: editor.commands.widgetbootstrapThreeCol == undefined ? false : editor.commands.widgetbootstrapThreeCol.state,
                     widgetbootstrapAlert: editor.commands.widgetbootstrapAlert == undefined ? false : editor.commands.widgetbootstrapAlert.state,
+                    widgetbootstrapAccordion: editor.commands.widgetbootstrapAccordion == undefined ? false : editor.commands.widgetbootstrapAccordion.state,
                     widgetAccordion: editor.commands.widgetAccordion == undefined ? false : editor.commands.widgetAccordion.state,
                     oembed: editor.commands.oembed == undefined ? false : editor.commands.oembed.state,
                     codeSnippet: editor.commands.codeSnippet == undefined ? false : editor.commands.codeSnippet.state,
