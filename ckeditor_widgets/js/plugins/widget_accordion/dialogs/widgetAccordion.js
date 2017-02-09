@@ -37,7 +37,6 @@ CKEDITOR.dialog.add( 'widgetAccordion', function( editor ) {
                         width: '50px',
                         label: 'Active panel (leave blank for accordion to be initially collapsed, or enter the number of the panel you would like open, ex: 1)',
                         setup: function( widget ) {
-                            console.log(widget.data.activePanel);
                             this.setValue( widget.data.activePanel);
                         },
                         commit: function( widget ) {

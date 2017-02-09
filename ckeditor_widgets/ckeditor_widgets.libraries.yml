@@ -4,3 +4,4 @@ widgets_accordion.load:
   dependencies:
     - core/jquery
     - core/jquery.ui.accordion
+    - core/jquery.once

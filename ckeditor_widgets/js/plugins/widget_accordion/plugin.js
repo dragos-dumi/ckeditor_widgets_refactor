@@ -6,9 +6,9 @@ CKEDITOR.plugins.add('widget_accordion', {
     init: function( editor ) {
 
         // Configurable settings
-        var allowedFull = editor.config.widgetcommon_allowedFull != undefined ? editor.config.widgetcommon_allowedFull :
-            'div(!row,two-col-left,two-col-right,accordion,two-col,three-col){width};' +
-            'div(!columns,col-xs-12,col-sm-3,col-sm-9,col-sidebar,col-main,col-1,col-2,col-3,panel,panel-default,panel-heading,panel-body)';
+        // var allowedFull = editor.config.widgetcommon_allowedFull != undefined ? editor.config.widgetcommon_allowedFull :
+        //     'div(!row,two-col-left,two-col-right,accordion,two-col,three-col){width};' +
+        //     'div(!columns,col-xs-12,col-sm-3,col-sm-9,col-sidebar,col-main,col-1,col-2,col-3,panel,panel-default,panel-heading,panel-body)';
 
         CKEDITOR.dialog.add( 'widgetAccordion', this.path + 'dialogs/widgetAccordion.js' );
 
@@ -18,20 +18,20 @@ CKEDITOR.plugins.add('widget_accordion', {
             button: 'Add accordion box',
 
             template:
-                '<div class="accordion" data-accordion></div>',
+                '<div class="jquery-ui-accordion" data-accordion></div>',
 
             editables: {
                 header: {
                     selector: '.accordion-none'
-                },
+                }
             },
 
-            allowedContent: allowedFull,
+            // allowedContent: allowedFull,
 
             dialog: 'widgetAccordion',
 
             upcast: function( element ) {
-                return element.name == 'div' && element.hasClass( 'accordion' );
+                return element.name == 'div' && element.hasClass( 'jquery-ui-accordion' );
             },
 
             init: function() {
@@ -45,10 +45,10 @@ CKEDITOR.plugins.add('widget_accordion', {
                     this.data.count = count;
                     for (var i=1; i <= count; i++) {
                         this.initEditable( 'heading'+i, {
-                            selector: '.accordion-header-'+i
+                            selector: '.jquery-ui-accordion-header-'+i
                         } );
                         this.initEditable( 'content'+i, {
-                            selector: '.content-'+i
+                            selector: '.jquery-ui-accordion-content-'+i
                         } );
                     }
                 }
@@ -66,11 +66,11 @@ CKEDITOR.plugins.add('widget_accordion', {
 
             data: function() {
 
-                var activePanel = this.data.activePanel != undefined ? this.data.activePanel - 1 : false;
-                var name = this.data.name != undefined ? this.data.name : 'accordion';
+                var activePanel = this.data.activePanel != undefined ? this.data.activePanel : false;
+                var name = this.data.name != undefined ? this.data.name : 'jquery-ui-accordion';
                 var count = this.data.count != undefined ? this.data.count : 0;
 
-                this.data.prevCount = this.element.data( 'count' );
+                this.data.prevCount = this.element.data('count');
                 this.element.data('count', count);
                 this.element.data('active', activePanel);
 
@@ -78,11 +78,11 @@ CKEDITOR.plugins.add('widget_accordion', {
                 if (this.data.prevCount == undefined || this.data.prevCount < count) {
                     for (var i = this.data.prevCount != undefined ? (this.data.prevCount * 1 + 1) : 1; i <= count; i++) {
                         var active = this.data.activePanel == i ? ' active' : '';
-                        var template = '<h3 class="accordion-header accordion-header-'+i+'">Heading '+i+'</h3>';
+                        var template = '<h3 class="jquery-ui-accordion-header jquery-ui-accordion-header-'+i+'">Heading '+i+'</h3>';
                         var newPanel = CKEDITOR.dom.element.createFromHtml( template );
                         this.element.append(newPanel);
 
-                        var template = '<div class="accordion-content content-'+i+active+'">' + 'Content ' + i + '</div>';
+                        var template = '<div class="jquery-ui-accordion-content jquery-ui-accordion-content-'+i+active+'">' + 'Content ' + i + '</div>';
                         var newPanel = CKEDITOR.dom.element.createFromHtml( template );
                         this.element.append(newPanel);
                     }
@@ -91,10 +91,10 @@ CKEDITOR.plugins.add('widget_accordion', {
                     // the html code added wasn't in the DOM yet
                     for (var i=this.data.prevCount != undefined ? this.data.prevCount : 1; i<=count; i++) {
                         this.initEditable( 'heading'+i, {
-                            selector: '.accordion-header-'+i
+                            selector: '.jquery-ui-accordion-header-'+i
                         } );
                         this.initEditable( 'content'+i, {
-                            selector: '.content-'+i
+                            selector: '.jquery-ui-accordion-content-'+i
                         } );
                     }
                 }
@@ -108,6 +108,19 @@ CKEDITOR.plugins.add('widget_accordion', {
                 }
             }
         } );
+
+        // If the "contextmenu" plugin is loaded, register the listeners.
+        if (editor.contextMenu) {
+            editor.contextMenu.addListener(function (element, selection) {
+                var menu = {};
+                var selection = editor.getSelection();
+                var selectedElement = selection.getSelectedElement();
+                if (selectedElement && selectedElement.find('.jquery-ui-accordion')) {
+                    menu = {widget_accordion: CKEDITOR.TRISTATE_OFF};
+                }
+                return menu;
+            });
+        }
 
         var item = {
             label: Drupal.t('Accordion'),
@@ -135,5 +148,5 @@ CKEDITOR.plugins.add('widget_accordion', {
         }
 
     }
-
-} );
+}
+);
